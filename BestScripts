@@ -1,0 +1,62 @@
+اگر مدیریت شبکه با MikroTik انجام می‌دهید، این اسکریپت‌ها از کاربردی‌ترین موارد هستند:
+1. بکاپ خودکار تنظیمات
+هر روز یک فایل Backup و Export تهیه می‌کند.
+/system backup save name=AutoBackup
+
+/export file=ConfigBackup
+2. ریبوت خودکار در ساعت مشخص
+/system scheduler
+add name=DailyReboot interval=1d start-time=04:00:00 \
+on-event="/system reboot"
+3. حذف DHCP Leaseهای قدیمی
+/ip dhcp-server lease
+remove [find status=expired]
+4. قطع دسترسی IPهای حمله‌کننده
+/ip firewall filter
+add chain=input connection-state=new protocol=tcp \
+dst-port=22,23,80,8291 \
+src-address-list=Blacklist action=drop
+5. مسدود کردن سایت‌ها با DNS
+/ip dns static
+add name=facebook.com address=127.0.0.1
+add name=youtube.com address=127.0.0.1
+6. مانیتورینگ اینترنت و ریست لینک در صورت قطعی
+:if ([/ping 8.8.8.8 count=3]=0) do={
+    /interface disable ether1
+    :delay 5
+    /interface enable ether1
+}
+7. حذف Queue کاربران غیرفعال
+:foreach i in=[/queue simple find] do={
+    :if ([/queue simple get $i bytes]=0) do={
+        /queue simple remove $i
+    }
+}
+8. ساخت خودکار Queue برای کاربران Hotspot
+:local user $"user"
+
+:if ([:len [/queue simple find name=$user]]=0) do={
+    /queue simple add name=$user target=$address max-limit=20M/20M
+}
+9. ارسال هشدار هنگام مصرف زیاد CPU
+:if ([/system resource get cpu-load] > 90) do={
+    :log warning "CPU Load High"
+}
+10. حذف کاربران Hotspot منقضی شده
+/ip hotspot user
+remove [find disabled=yes]
+مجموعه اسکریپت‌های حرفه‌ای که معمولاً مدیران شبکه استفاده می‌کنند:
+مدیریت خودکار Hotspot و User Manager
+تقسیم هوشمند پهنای باند با PCQ
+بکاپ خودکار و ارسال به ایمیل یا FTP
+Failover دو یا چند اینترنت
+Load Balance (PCC و ECMP)
+مانیتورینگ Ping و ریست خودکار لینک
+مسدودسازی حملات Brute Force
+بروزرسانی Dynamic DNS
+پاکسازی خودکار لاگ‌ها و فایل‌های قدیمی
+ساخت خودکار کاربران Hotspot (Voucher)
+مدیریت خودکار Address List
+ارسال هشدار به تلگرام هنگام قطع اینترنت یا افزایش بار CPU
+مانیتورینگ مصرف کاربران و گزارش‌گیری دوره‌ای
+RouterOS از اسکریپت‌نویسی داخلی و اجرای خودکار از طریق Scheduler، Netwatch و سایر رویدادها پشتیبانی می‌کند و مستندات رسمی و نمونه‌اسکریپت‌های متعددی برای آن منتشر شده
