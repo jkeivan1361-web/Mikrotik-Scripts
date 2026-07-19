@@ -1,0 +1,3 @@
+/queue type
+add name=PCQ-DOWN kind=pcq pcq-classifier=dst-address
+add name=PCQ-UP kind=address pcq-classifier=src-address
