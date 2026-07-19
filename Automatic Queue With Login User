@@ -1,0 +1,13 @@
+:local user $"user"
+
+/queue simple
+:if ([:len [/queue simple find where name=$user]] = 0) do={
+    add name=$user target=$address max-limit=0/0
+}
+
+:local user $"user"
+
+/queue simple
+remove [find where name=$user]
+
+
