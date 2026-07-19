@@ -1,0 +1,4 @@
+/queue simple
+add name=HOTSPOT target=0.0.0.0/0 \
+max-limit=100M/100M \
+queue=PCQ-UP/PCQ-DOWN
