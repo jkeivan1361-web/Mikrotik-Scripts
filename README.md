@@ -1,55 +1,47 @@
-# Mikrotik-Scripts
-اسکریپت های کاربردی میکروتیک. https://karajshabake.ir
-mikrotik-scripts/
-│
-├── README.md
-├── LICENSE
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-│
-├── basic/
-│   ├── change-identity.rsc
-│   ├── configure-dns.rsc
-│   ├── configure-ntp.rsc
-│   ├── create-bridge.rsc
-│   └── secure-services.rsc
-│
-├── firewall/
-│   ├── block-port-scan.rsc
-│   ├── brute-force-protection.rsc
-│   ├── ddos-protection.rsc
-│   ├── syn-flood.rsc
-│   └── blacklist-auto.rsc
-│
-├── hotspot/
-│   ├── hotspot-setup.rsc
-│   ├── auto-create-user.rsc
-│   ├── auto-remove-expired.rsc
-│   └── login-limit.rsc
-│
-├── queue/
-│   ├── pcq-equal-bandwidth.rsc
-│   ├── queue-tree.rsc
-│   ├── burst-limit.rsc
-│   └── dynamic-simple-queue.rsc
-│
-├── routing/
-│   ├── failover.rsc
-│   ├── pcc-loadbalance.rsc
-│   └── recursive-route.rsc
-│
-├── monitoring/
-│   ├── internet-monitor.rsc
-│   ├── cpu-monitor.rsc
-│   ├── memory-monitor.rsc
-│   └── telegram-alert.rsc
-│
-├── backup/
-│   ├── daily-backup.rsc
-│   ├── ftp-backup.rsc
-│   └── email-backup.rsc
-│
-└── docs/
-    ├── installation.md
-    ├── routeros-v6.md
-    └── routeros-v7.md
+# MikroTik Scripts Collection
+اسکریپت های کاربردی میکروتیک 
+https://karajshabake.ir
+
+Professional MikroTik RouterOS Scripts
+
+## Features
+
+- Hotspot
+- User Manager
+- Firewall
+- PCQ
+- Queue Tree
+- Failover
+- Load Balance
+- Backup
+- Monitoring
+- Telegram Notification
+
+## Compatibility
+
+- RouterOS v6
+- RouterOS v7
+
+## Installation
+
+Import script
+
+```bash
+/import file-name=script.rsc
+```
+
+## Categories
+
+| Folder | Description |
+|----------|------------|
+| basic | Basic Configuration |
+| firewall | Security |
+| hotspot | Hotspot |
+| queue | Bandwidth Management |
+| routing | Multi WAN |
+| monitoring | Monitoring |
+| backup | Backup |
+
+## License
+
+MIT License
